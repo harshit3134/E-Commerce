@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from products.models import Product, SizeVariant
 # Create your views here.
@@ -85,6 +86,21 @@ def add_to_cart(request, uid):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFER'))
 
-def cart(request):
-    context={'cart':Cart.objects.filter(is_paid=False,user=request.user)}
-    return render(request,'accounts/cart.html',context)
+# def cart(request):
+#     context={'cart':Cart.objects.filter(is_paid=False,user=request.user)}
+#     return render(request,'accounts/cart.html',context)
+
+@login_required
+def cart_view(request):
+    # Retrieve the user's cart
+    cart = Cart.objects.get(user=request.user,is_paid = False)
+
+    # Retrieve all cart items associated with the cart
+    cart_items = CartItems.objects.filter(cart=cart)
+
+    context = {
+        'cart': cart,
+        'cart_items': cart_items
+    }
+
+    return render(request, 'accounts/cart.html', context)

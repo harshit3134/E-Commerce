@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 {% block start%}
 <tbody>
-    {% for cart_item in cart.cart_items.all %}
+    {% for cart_item in cart_items %}
     <tr>
         <td>
             <figure class="itemside">
@@ -54,12 +54,6 @@
             >
                 <i class="fa fa-heart"></i
             ></a>
-            <a
-                href="{% url 'remove_cart_item' cart_item.uid %}"
-                class="btn btn-light"
-            >
-                Remove</a
-            >
         </td>
     </tr>
     {% endfor %}
