@@ -89,6 +89,10 @@ def add_to_cart(request, uid):
 # def cart(request):
 #     context={'cart':Cart.objects.filter(is_paid=False,user=request.user)}
 #     return render(request,'accounts/cart.html',context)
+def remove_cart(request,cart_item_uid):
+    cart_item=CartItems.objects.get(uid=cart_item_uid)
+    cart_item.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def cart_view(request):

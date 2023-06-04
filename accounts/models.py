@@ -17,13 +17,24 @@ class Profile(BaseModel):
     profile_image = models.ImageField(upload_to='profile')
 
     def get_cart_count(self):
-        return CartItems.objects.filter(cart__is_paid=False,cart__user=self.user).count()
+        return CartItems.objects.filter(cart__is_paid=False, cart__user=self.user).count()
 
 
 class Cart(BaseModel):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="carts")
     is_paid = models.BooleanField(default=False)
+
+    def get_cart_total(self):
+        cart_items = self.cart_items.all()
+        price = []
+        for cart_item in cart_items:
+            price.append(cart_item.product.price)
+            if cart_item.size_variant:
+                size_variant_price = cart_item.size_variant.price
+                price.append(size_variant_price)
+
+        return sum(price)
 
 
 class CartItems(BaseModel):
@@ -33,6 +44,14 @@ class CartItems(BaseModel):
         Product, on_delete=models.SET_NULL, null=True, blank=True)
     size_variant = models.ForeignKey(
         SizeVariant, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def get_product_price(self):
+        price = [self.product.price]
+
+        if self.size_variant:
+            size_variant_price = self.size_variant.price
+            price.append(size_variant_price)
+        return sum(price)
 
 
 @receiver(post_save, sender=User)
