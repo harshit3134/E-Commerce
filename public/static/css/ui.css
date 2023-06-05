@@ -9,6 +9,31 @@ html {
 INCLUDE STYLES AND COMPONENTS
 ===================== */
 /* ================== HELPERS  =================== */
+body{
+  background-color: white;
+}
+.container-2{
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+.container .item-desc{
+  display: flex;
+}
+.form-outline{
+  width: 100px; /* Adjust the width value as per your preference */
+
+}
+.form-control{
+  width: 100px;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: rgba(251, 250, 252, 0.836);
+  
+ 
+  }
 a:hover {
   text-decoration: none; }
 
