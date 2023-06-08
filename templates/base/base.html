@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -84,11 +85,13 @@
           <div class="row align-items-center">
             <div class="col-lg-2 col-4">
               <div class="brand-wrap">
-                <img class="logo" src="media/images/android-chrome-192x192.png">
+                <img class="logo" src="{% static 'images/android-chrome-192x192.png' %}">
               </div>
               <!-- brand-wrap.// -->
             </div>
             <div class="col-lg-6 col-sm-12">
+              
+            {% if show_search_bar %}
               <form action="{% url 'search' %}" class="search" method="get">
                 <div class="input-group w-100">
                   <input
@@ -105,6 +108,7 @@
                 </div>
               </form>
               <!-- search-wrap .end// -->
+            {%endif%}
             </div>
             <!-- col.// -->
             <div class="col-lg-4 col-sm-6 col-8">

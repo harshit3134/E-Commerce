@@ -4,7 +4,7 @@ from django.db.models import Q
 
 def index(request):
 
-    context = {'products': Product.objects.all()}
+    context = {'products': Product.objects.all(),'show_search_bar' : True }
     return render(request, 'home/index.html', context)
 
 def search(request):
@@ -15,5 +15,5 @@ def search(request):
         Q(author__icontains = q)
         )
     context = {'products' : products}
-
+    
     return render(request, 'home/index.html',context)
