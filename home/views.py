@@ -12,8 +12,7 @@ def search(request):
     products = Product.objects.filter(
         Q(category__category_name__icontains = q)|
         Q(product_name__icontains = q)|
-        Q(author__icontains = q)|
-        Q(product_description__icontains = q)
+        Q(author__icontains = q)
         )
     context = {'products' : products}
 

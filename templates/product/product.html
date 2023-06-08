@@ -31,7 +31,7 @@
             <h2 class="title">{{product.product_name}}</h2>
             <div class="rating-wrap my-3">
               <ul class="rating-stars">
-                <li style="width: 80%" class="stars-active">
+                <li style="width:80%" class="stars-active">
                   <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
@@ -42,9 +42,9 @@
                   <i class="fa fa-star"></i>
                 </li>
               </ul>
-              <small class="label-rating text-muted">132 reviews</small>
+              <small class="label-rating text-muted">Reviews</small>
               <small class="label-rating text-success">
-                <i class="fa fa-clipboard-check"></i> 154 orders
+                <i class="fa fa-clipboard-check"></i>{%if product.orders%} {{product.orders}} Verified Purchase{%else%} No orders{%endif%}
               </small>
             </div>
             <!-- rating-wrap.// -->

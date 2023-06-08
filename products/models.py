@@ -35,6 +35,9 @@ class Product(BaseModel):
     size_variant = models.ManyToManyField(SizeVariant, blank=True)
     author = models.CharField(max_length=100, blank=True, null=True)
     stocks = models.PositiveIntegerField(blank=True, null=True)
+    reviews=models.IntegerField(blank=True,null=True)
+    orders=models.IntegerField(blank=True,null=True)
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.product_name)

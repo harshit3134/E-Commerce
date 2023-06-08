@@ -40,6 +40,8 @@
                 <p>Author: {{cart_item.product.author}}</p>
                 {% if cart_item.size_variant %}
                 <p>Variant: {{cart_item.size_variant}}</p>
+                {%else%}
+                <p>Variant: Default HardCover</p>
                 {% endif %}
                 <a href="{%url 'remove_cart' cart_item.uid%}"
                   ><button

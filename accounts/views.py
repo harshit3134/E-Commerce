@@ -7,9 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from products.models import Product, SizeVariant
-# Create your views here.
 from .models import Cart, CartItems, Profile
-
+from home.views import index
 
 def login_page(request):
 
@@ -60,6 +59,10 @@ def register_page(request):
     return render(request, 'accounts/register.html')
 
 
+def logout_page(request):
+    logout(request)
+    return redirect('index')
+
 def activate_email(request, email_token):
     try:
         user = Profile.objects.get(email_token=email_token)
@@ -84,7 +87,7 @@ def add_to_cart(request, uid):
         cart_item.size_variant = size_variant
         cart_item.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFER'))
+    return redirect('index')
 
 # def cart(request):
 #     context={'cart':Cart.objects.filter(is_paid=False,user=request.user)}
