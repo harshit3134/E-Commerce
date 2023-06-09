@@ -1,10 +1,14 @@
 {% extends "base/base.html" %} {% block start %}
+{% load static %}
 
+<img src="{% static 'images/logo-black.png' %}" style="height: 50%; width: 50%; margin-left: 22%; margin-top: 0px; margin-bottom: 0px;" alt="">
 <section class="section-conten padding-y" style="min-height: 84vh">
   <!-- ============================ COMPONENT LOGIN   ================================= -->
-  <div class="card mx-auto" style="max-width: 380px; margin-top: 100px">
+  <div class="card mx-auto" style="max-width: 400px; margin-top: 0px">
     <div class="card-body">
-      <h4 class="card-title mb-4">Sign Up</h4>
+      <h4 class="card-title mb-0" style="text-align: center;">Enter the Fiction World!</h4>
+      <h4 class="card-title" style="text-align: center;">Create your Account</h4>
+
       <form method="POST">
         {% csrf_token %} {% include "base/alert.html" %}
 
@@ -15,6 +19,7 @@
             placeholder="First Name"
             name="first_name"
             type="text"
+            style="width: 100%;"
           />
         </div>
         <div class="form-group">
@@ -24,6 +29,8 @@
             placeholder="Last Name"
             name="last_name"
             type="text"
+            style="width: 100%;"
+
           />
         </div>
 
@@ -34,6 +41,8 @@
             placeholder="Email"
             name="email"
             type="text"
+            style="width: 100%;"
+
           />
         </div>
         <!-- form-group// -->
@@ -44,6 +53,8 @@
             placeholder="Password"
             name="password"
             type="password"
+            style="width: 100%;"
+
           />
         </div>
         <!-- form-group// -->
@@ -60,7 +71,7 @@
   </div>
   <!-- card .// -->
 
-  <p class="text-center mt-4">Already have account? <a href="#">Sign in</a></p>
+  <p class="text-center mt-4">Already have account? <a href="{%url 'login'%}">Sign in</a></p>
   <br /><br />
   <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
 </section>
