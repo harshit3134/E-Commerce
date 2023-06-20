@@ -143,3 +143,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'harshitajakiya3134@gmail.com'
 EMAIL_HOST_PASSWORD = 'gdqbumvvqiyykfhd'
+
+
+KEY	= 'rzp_test_4jTyMUbZG9K1k3'                  
+SECRET = 'GzY4XrjZQbHcm1vWGYZyjlDY'

@@ -9,6 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from products.models import Product, SizeVariant
 from .models import Cart, CartItems, Profile
 from home.views import index
+import razorpay
+from django.conf import settings
 
 def login_page(request):
 
@@ -104,10 +106,29 @@ def cart_view(request):
 
     # Retrieve all cart items associated with the cart
     cart_items = CartItems.objects.filter(cart=cart)
-
-    context = {
-        'cart': cart,
-        'cart_items': cart_items
-    }
-
+    total = cart.get_cart_total()
+    if int(total) > 0 :
+        client = razorpay.Client(auth = (settings.KEY,settings.SECRET))
+        payment = client.order.create({'amount' : cart.get_cart_total()*100,'currency': 'INR','payment_capture' : 1})
+        cart.razorpay_order_id = payment['id']
+        cart.save()
+        context = {
+            'cart': cart,
+            'cart_items': cart_items,
+            'payment' : payment
+        }
+    else:
+        context = {
+            'cart': cart,
+            'cart_items': cart_items,
+        }
+    # print ("*******************")
+    # print(payment)
     return render(request, 'accounts/cart.html', context)
+
+def payment_sucess(request):
+    order_id = request.GET.get('order_id')
+    cart = Cart.objects.get(razorpay_order_id=order_id)
+    cart.is_paid = True
+    cart.save()
+    return HttpResponse("Payment successful")
