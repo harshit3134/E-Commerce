@@ -1,3 +1,3 @@
 # E-Commerce
 
-made with Django+SQLite,Ecommerce generic site with addon features
+made with Django+SQLite, Ecommerce generic site with add on features
